@@ -1,0 +1,49 @@
+<div class="login">
+        <input type="text" id="username" placeholder="Username"><br>
+        <input type="password" id="password" placeholder="Password"><br>
+        <button onclick="login()">Login</button>
+        <button onclick="register()">Register</button>
+    </div>
+    
+    <script>
+        let cart = [];
+        function addToCart(button) {
+            let product = button.parentElement;
+            let name = product.getAttribute('data-name');
+            let price = parseInt(product.getAttribute('data-price'));
+            cart.push({ name, price });
+            updateCart();
+        }
+        function updateCart() {
+            let cartList = document.getElementById('cart');
+            let totalElement = document.getElementById('total');
+            cartList.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                let li = document.createElement('li');
+                li.textContent = `${item.name} - Rp${item.price}`;
+                cartList.appendChild(li);
+                total += item.price;
+            });
+            totalElement.textContent = `Rp${total}`;
+        }
+        function checkout() {
+            document.getElementById('checkout-form').classList.remove('hidden');
+        }
+        function processOrder() {
+            alert('Pesanan berhasil dibuat!');
+            cart = [];
+            updateCart();
+            document.getElementById('checkout-form').classList.add('hidden');
+        }
+        function login() {
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            alert(`Login sukses! Selamat datang, ${username}`);
+        }
+        function register() {
+            alert('Registrasi berhasil! Silakan login.');
+        }
+    </script>
+</body>
+</html>
